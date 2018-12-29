@@ -32,9 +32,6 @@ class BuildInterpolator
     {
         $this->interpolationVars = [];
 
-        /** @deprecated The variable is deprecated and will be deleted in version 2.0! */
-        $this->interpolationVars['%PHPCI%'] = 1;
-
         $this->interpolationVars['%COMMIT%']         = $build->getCommitId();
         $this->interpolationVars['%SHORT_COMMIT%']   = substr($build->getCommitId(), 0, 7);
         $this->interpolationVars['%COMMIT_EMAIL%']   = $build->getCommitterEmail();
@@ -49,39 +46,6 @@ class BuildInterpolator
         $this->interpolationVars['%BRANCH%']         = $build->getBranch();
         $this->interpolationVars['%BRANCH_URI%']     = $build->getBranchLink();
         $this->interpolationVars['%ENVIRONMENT%']    = $build->getEnvironment();
-
-        /** @deprecated The variables are deprecated and will be deleted in version 2.0. Use the variables '%COMMIT%', '%SHORT_COMMIT%' etc. instead. */
-        $this->interpolationVars['%PHPCI_COMMIT%']         = $this->interpolationVars['%COMMIT%'];
-        $this->interpolationVars['%PHPCI_SHORT_COMMIT%']   = $this->interpolationVars['%SHORT_COMMIT%'];
-        $this->interpolationVars['%PHPCI_COMMIT_EMAIL%']   = $this->interpolationVars['%COMMIT_EMAIL%'];
-        $this->interpolationVars['%PHPCI_COMMIT_MESSAGE%'] = $this->interpolationVars['%COMMIT_MESSAGE%'];
-        $this->interpolationVars['%PHPCI_COMMIT_URI%']     = $this->interpolationVars['%COMMIT_URI%'];
-        $this->interpolationVars['%PHPCI_PROJECT%']        = $this->interpolationVars['%PROJECT%'];
-        $this->interpolationVars['%PHPCI_PROJECT_TITLE%']  = $this->interpolationVars['%PROJECT_TITLE%'];
-        $this->interpolationVars['%PHPCI_PROJECT_URI%']    = $this->interpolationVars['%PROJECT_URI%'];
-        $this->interpolationVars['%PHPCI_BUILD%']          = $this->interpolationVars['%BUILD%'];
-        $this->interpolationVars['%PHPCI_BUILD_PATH%']     = $this->interpolationVars['%BUILD_PATH%'];
-        $this->interpolationVars['%PHPCI_BUILD_URI%']      = $this->interpolationVars['%BUILD_URI%'];
-        $this->interpolationVars['%PHPCI_BRANCH%']         = $this->interpolationVars['%BRANCH%'];
-        $this->interpolationVars['%PHPCI_BRANCH_URI%']     = $this->interpolationVars['%BRANCH_URI%'];
-        $this->interpolationVars['%PHPCI_ENVIRONMENT%']    = $this->interpolationVars['%ENVIRONMENT%'];
-
-        /** @deprecated This environment variables are deprecated and will be deleted in version 2.0. Use the variables 'PHP_CENSOR_' instead. */
-        putenv('PHPCI=1');
-        putenv('PHPCI_COMMIT=' . $this->interpolationVars['%COMMIT%']);
-        putenv('PHPCI_SHORT_COMMIT=' . $this->interpolationVars['%SHORT_COMMIT%']);
-        putenv('PHPCI_COMMIT_EMAIL=' . $this->interpolationVars['%COMMIT_EMAIL%']);
-        putenv('PHPCI_COMMIT_MESSAGE=' . $this->interpolationVars['%COMMIT_MESSAGE%']);
-        putenv('PHPCI_COMMIT_URI=' . $this->interpolationVars['%COMMIT_URI%']);
-        putenv('PHPCI_PROJECT=' . $this->interpolationVars['%PROJECT%']);
-        putenv('PHPCI_PROJECT_TITLE=' . $this->interpolationVars['%PROJECT_TITLE%']);
-        putenv('PHPCI_PROJECT_URI=' . $this->interpolationVars['%PROJECT_URI%']);
-        putenv('PHPCI_BUILD=' . $this->interpolationVars['%BUILD%']);
-        putenv('PHPCI_BUILD_PATH=' . $this->interpolationVars['%BUILD_PATH%']);
-        putenv('PHPCI_BUILD_URI=' . $this->interpolationVars['%BUILD_URI%']);
-        putenv('PHPCI_BRANCH=' . $this->interpolationVars['%BRANCH%']);
-        putenv('PHPCI_BRANCH_URI=' . $this->interpolationVars['%BRANCH_URI%']);
-        putenv('PHPCI_ENVIRONMENT=' . $this->interpolationVars['%ENVIRONMENT%']);
 
         putenv('PHP_CENSOR=1');
         putenv('PHP_CENSOR_COMMIT=' . $this->interpolationVars['%COMMIT%']);

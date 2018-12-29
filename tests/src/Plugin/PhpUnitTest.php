@@ -66,7 +66,7 @@ class PhpUnitTest extends \PHPUnit\Framework\TestCase
     public function testSingleDir()
     {
         $options = [
-            'directory' => '/test/directory/one'
+            'directories' => '/test/directory/one'
         ];
 
         $mockPlugin = $this->getPluginBuilder($options)->setMethods(['runConfig'])->getMock();
@@ -78,7 +78,7 @@ class PhpUnitTest extends \PHPUnit\Framework\TestCase
     public function testMultiDir()
     {
         $options = [
-            'directory' => [
+            'directories' => [
                 '/test/directory/one',
                 '/test/directory/two',
             ]
@@ -108,7 +108,7 @@ class PhpUnitTest extends \PHPUnit\Framework\TestCase
     public function testProcessResultsFromDir()
     {
         $options = [
-            'directory' => ROOT_DIR . 'Tests'
+            'directories' => ROOT_DIR . 'Tests'
         ];
 
         $mockPlugin = $this->getPluginBuilder($options)->setMethods(['processResults'])->getMock();

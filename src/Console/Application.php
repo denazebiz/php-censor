@@ -10,9 +10,7 @@ use PHPCensor\Command\CheckLocalizationCommand;
 use PHPCensor\Command\CreateAdminCommand;
 use PHPCensor\Command\CreateBuildCommand;
 use PHPCensor\Command\InstallCommand;
-use PHPCensor\Command\RebuildCommand;
 use PHPCensor\Command\RebuildQueueCommand;
-use PHPCensor\Command\RunCommand;
 use PHPCensor\Command\WorkerCommand;
 use PHPCensor\Config;
 use PHPCensor\Logging\AnsiFormatter;
@@ -164,12 +162,10 @@ LOGO;
         $buildService = new BuildService($buildStore, $projectStore);
         $logger       = $this->initLogger($applicationConfig);
 
-        $this->add(new RebuildCommand($logger));
         $this->add(new InstallCommand());
         $this->add(new CreateAdminCommand($userStore));
         $this->add(new CreateBuildCommand($projectStore, $buildService));
         $this->add(new WorkerCommand($logger, $buildService));
-        $this->add(new RunCommand($logger, $buildService));
         $this->add(new RebuildQueueCommand($logger));
         $this->add(new CheckLocalizationCommand());
     }
