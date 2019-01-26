@@ -645,3 +645,19 @@ h6,
 .arrow_trend_negative {
     color: #dd4b39;
 }
+
+@keyframes blink-running-build {
+    from {
+        color: #fff;
+    }
+    to {
+        color: transparent;
+    }
+}
+
+.running_build_icon {
+    color: #fff;
+    animation-name: blink-running-build;
+    animation-iteration-count: infinite;
+    animation-duration: 1000ms;
+}
