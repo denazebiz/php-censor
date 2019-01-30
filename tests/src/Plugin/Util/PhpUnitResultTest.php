@@ -5,6 +5,7 @@ namespace Tests\PHPCensor\Plugin\Util;
 use PHPCensor\Plugin\Util\PhpUnitResult;
 use PHPCensor\Plugin\Util\PhpUnitResultJson;
 use PHPCensor\Plugin\Util\PhpUnitResultJunit;
+use PHPUnit\Framework\ExpectationFailedException;
 
 /**
  * Class PhpUnitResultTest parses the results for the PhpUnitV2 plugin
@@ -22,6 +23,9 @@ class PhpUnitResultTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getTestData
+     *
+     * @param string $resultClass
+     * @param string $testFile
      */
     public function testInitParse($resultClass, $testFile)
     {
@@ -44,16 +48,18 @@ class PhpUnitResultTest extends \PHPUnit\Framework\TestCase
         self::assertEquals("has output\non lines", $output[15]['output']);
 
         self::assertEquals(PhpUnitResult::SEVERITY_SKIPPED, $output[5]['severity']);
+
         try {
             self::assertContains('Incomplete Test:', $output[5]['message']);
-        } catch (\PHPUnit_Framework_ExpectationFailedException $e) {
+        } catch (ExpectationFailedException $e) {
             self::$skipped[] = ['cls' => $resultClass, 'ex' => $e];
         }
 
         self::assertEquals(PhpUnitResult::SEVERITY_SKIPPED, $output[11]['severity']);
+
         try {
             self::assertContains('Skipped Test:', $output[11]['message']);
-        } catch (\PHPUnit_Framework_ExpectationFailedException $e) {
+        } catch (ExpectationFailedException $e) {
             self::$skipped[] = ['cls' => $resultClass, 'ex' => $e];
         }
     }

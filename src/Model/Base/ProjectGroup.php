@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PHPCensor\Model\Base;
 
 use PHPCensor\Model;
@@ -29,14 +31,9 @@ class ProjectGroup extends Model
      * @param int $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setId($value)
+    public function setId(int $value)
     {
-        $this->validateNotNull('id', $value);
-        $this->validateInt('id', $value);
-
         if ($this->data['id'] === $value) {
             return false;
         }
@@ -58,14 +55,9 @@ class ProjectGroup extends Model
      * @param string $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setTitle($value)
+    public function setTitle(string $value)
     {
-        $this->validateNotNull('title', $value);
-        $this->validateString('title', $value);
-
         if ($this->data['title'] === $value) {
             return false;
         }
@@ -119,14 +111,9 @@ class ProjectGroup extends Model
      * @param int $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setUserId($value)
+    public function setUserId(int $value)
     {
-        $this->validateNotNull('user_id', $value);
-        $this->validateInt('user_id', $value);
-
         if ($this->data['user_id'] === $value) {
             return false;
         }

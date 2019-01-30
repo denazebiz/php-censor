@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PHPCensor\Model\Base;
 
 use PHPCensor\Exception\InvalidArgumentException;
@@ -68,14 +70,9 @@ class Project extends Model
      * @param int $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setId($value)
+    public function setId(int $value)
     {
-        $this->validateNotNull('id', $value);
-        $this->validateInt('id', $value);
-
         if ($this->data['id'] === $value) {
             return false;
         }
@@ -97,14 +94,9 @@ class Project extends Model
      * @param string $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setTitle($value)
+    public function setTitle(string $value)
     {
-        $this->validateNotNull('title', $value);
-        $this->validateString('title', $value);
-
         if ($this->data['title'] === $value) {
             return false;
         }
@@ -126,14 +118,9 @@ class Project extends Model
      * @param string $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setReference($value)
+    public function setReference(string $value)
     {
-        $this->validateNotNull('reference', $value);
-        $this->validateString('reference', $value);
-
         if ($this->data['reference'] === $value) {
             return false;
         }
@@ -171,14 +158,9 @@ class Project extends Model
      * @param string $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setBranch($value)
+    public function setBranch(string $value)
     {
-        $this->validateNotNull('branch', $value);
-        $this->validateString('branch', $value);
-
         if ($this->data['branch'] === $value) {
             return false;
         }
@@ -200,14 +182,9 @@ class Project extends Model
      * @param bool $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setDefaultBranchOnly($value)
+    public function setDefaultBranchOnly(bool $value)
     {
-        $this->validateNotNull('default_branch_only', $value);
-        $this->validateBoolean('default_branch_only', $value);
-
         if ($this->data['default_branch_only'] === (int)$value) {
             return false;
         }
@@ -226,16 +203,12 @@ class Project extends Model
     }
 
     /**
-     * @param string $value
+     * @param string|null $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setSshPrivateKey($value)
+    public function setSshPrivateKey(?string $value)
     {
-        $this->validateString('ssh_private_key', $value);
-
         if ($this->data['ssh_private_key'] === $value) {
             return false;
         }
@@ -254,16 +227,12 @@ class Project extends Model
     }
 
     /**
-     * @param string $value
+     * @param string|null $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setSshPublicKey($value)
+    public function setSshPublicKey(?string $value)
     {
-        $this->validateString('ssh_public_key', $value);
-
         if ($this->data['ssh_public_key'] === $value) {
             return false;
         }
@@ -288,11 +257,8 @@ class Project extends Model
      *
      * @throws InvalidArgumentException
      */
-    public function setType($value)
+    public function setType(string $value)
     {
-        $this->validateNotNull('type', $value);
-        $this->validateString('type', $value);
-
         if (!in_array($value, static::$allowedTypes, true)) {
             throw new InvalidArgumentException(
                 'Column "type" must be one of: ' . join(', ', static::$allowedTypes) . '.'
@@ -330,13 +296,9 @@ class Project extends Model
      * @param array $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
     public function setAccessInformation(array $value)
     {
-        $this->validateNotNull('access_information', $value);
-
         $accessInformation = json_encode($value);
         if ($this->data['access_information'] === $accessInformation) {
             return false;
@@ -356,16 +318,12 @@ class Project extends Model
     }
 
     /**
-     * @param string $value
+     * @param string|null $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setBuildConfig($value)
+    public function setBuildConfig(?string $value)
     {
-        $this->validateString('build_config', $value);
-
         if ($this->data['build_config'] === $value) {
             return false;
         }
@@ -387,14 +345,9 @@ class Project extends Model
      * @param bool $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setOverwriteBuildConfig($value)
+    public function setOverwriteBuildConfig(bool $value)
     {
-        $this->validateNotNull('overwrite_build_config', $value);
-        $this->validateBoolean('overwrite_build_config', $value);
-
         if ($this->data['overwrite_build_config'] === (int)$value) {
             return false;
         }
@@ -416,14 +369,9 @@ class Project extends Model
      * @param bool $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setAllowPublicStatus($value)
+    public function setAllowPublicStatus(bool $value)
     {
-        $this->validateNotNull('allow_public_status', $value);
-        $this->validateBoolean('allow_public_status', $value);
-
         if ($this->data['allow_public_status'] === (int)$value) {
             return false;
         }
@@ -445,14 +393,9 @@ class Project extends Model
      * @param bool $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setArchived($value)
+    public function setArchived(bool $value)
     {
-        $this->validateNotNull('archived', $value);
-        $this->validateBoolean('archived', $value);
-
         if ($this->data['archived'] === (int)$value) {
             return false;
         }
@@ -474,14 +417,9 @@ class Project extends Model
      * @param int $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setGroupId($value)
+    public function setGroupId(int $value)
     {
-        $this->validateNotNull('group_id', $value);
-        $this->validateInt('group_id', $value);
-
         if ($this->data['group_id'] === $value) {
             return false;
         }
@@ -535,14 +473,9 @@ class Project extends Model
      * @param int $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setUserId($value)
+    public function setUserId(int $value)
     {
-        $this->validateNotNull('user_id', $value);
-        $this->validateInt('user_id', $value);
-
         if ($this->data['user_id'] === $value) {
             return false;
         }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PHPCensor\Model\Base;
 
 use PHPCensor\Exception\InvalidArgumentException;
@@ -91,14 +93,9 @@ class Build extends Model
      * @param int $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setId($value)
+    public function setId(int $value)
     {
-        $this->validateNotNull('id', $value);
-        $this->validateInt('id', $value);
-
         if ($this->data['id'] === $value) {
             return false;
         }
@@ -120,14 +117,9 @@ class Build extends Model
      * @param int $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setParentId($value)
+    public function setParentId(int $value)
     {
-        $this->validateNotNull('parent_id', $value);
-        $this->validateInt('parent_id', $value);
-
         if ($this->data['parent_id'] === $value) {
             return false;
         }
@@ -149,14 +141,9 @@ class Build extends Model
      * @param int $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setProjectId($value)
+    public function setProjectId(int $value)
     {
-        $this->validateNotNull('project_id', $value);
-        $this->validateInt('project_id', $value);
-
         if ($this->data['project_id'] === $value) {
             return false;
         }
@@ -178,14 +165,9 @@ class Build extends Model
      * @param string $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setCommitId($value)
+    public function setCommitId(string $value)
     {
-        $this->validateNotNull('commit_id', $value);
-        $this->validateString('commit_id', $value);
-
         if ($this->data['commit_id'] === $value) {
             return false;
         }
@@ -210,11 +192,8 @@ class Build extends Model
      *
      * @throws InvalidArgumentException
      */
-    public function setStatus($value)
+    public function setStatus(int $value)
     {
-        $this->validateNotNull('status', $value);
-        $this->validateInt('status', $value);
-
         if (!in_array($value, $this->allowedStatuses, true)) {
             throw new InvalidArgumentException(
                 'Column "status" must be one of: ' . join(', ', $this->allowedStatuses) . '.'
@@ -278,13 +257,9 @@ class Build extends Model
      * @param string|null $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setLog($value)
+    public function setLog(?string $value)
     {
-        $this->validateString('log', $value);
-
         if ($this->data['log'] === $value) {
             return false;
         }
@@ -306,14 +281,9 @@ class Build extends Model
      * @param string $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setBranch($value)
+    public function setBranch(string $value)
     {
-        $this->validateNotNull('branch', $value);
-        $this->validateString('branch', $value);
-
         if ($this->data['branch'] === $value) {
             return false;
         }
@@ -335,13 +305,9 @@ class Build extends Model
      * @param string|null $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setTag($value)
+    public function setTag(?string $value)
     {
-        $this->validateString('tag', $value);
-
         if ($this->data['tag'] === $value) {
             return false;
         }
@@ -459,13 +425,9 @@ class Build extends Model
      * @param string|null $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setCommitterEmail($value)
+    public function setCommitterEmail(?string $value)
     {
-        $this->validateString('committer_email', $value);
-
         if ($this->data['committer_email'] === $value) {
             return false;
         }
@@ -487,13 +449,9 @@ class Build extends Model
      * @param string|null $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setCommitMessage($value)
+    public function setCommitMessage(?string $value)
     {
-        $this->validateString('commit_message', $value);
-
         if ($this->data['commit_message'] === $value) {
             return false;
         }
@@ -526,12 +484,9 @@ class Build extends Model
      *
      * @return bool
      *
-     * @throws InvalidArgumentException
      */
     public function setExtra(array $value)
     {
-        $this->validateNotNull('extra', $value);
-
         $extra = json_encode($value);
         if ($this->data['extra'] === $extra) {
             return false;
@@ -554,13 +509,9 @@ class Build extends Model
      * @param string|null $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setEnvironment($value)
+    public function setEnvironment(?string $value)
     {
-        $this->validateString('environment', $value);
-
         if ($this->data['environment'] === $value) {
             return false;
         }
@@ -579,16 +530,14 @@ class Build extends Model
     }
 
     /**
-     * @param int $value
+     * @param int|null $value
      *
      * @return bool
      *
      * @throws InvalidArgumentException
      */
-    public function setSource($value)
+    public function setSource(?int $value)
     {
-        $this->validateInt('source', $value);
-
         if (!in_array($value, $this->allowedSources, true)) {
             throw new InvalidArgumentException(
                 'Column "source" must be one of: ' . join(', ', $this->allowedSources) . '.'
@@ -616,14 +565,9 @@ class Build extends Model
      * @param int $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setUserId($value)
+    public function setUserId(int $value)
     {
-        $this->validateNotNull('user_id', $value);
-        $this->validateInt('user_id', $value);
-
         if ($this->data['user_id'] === $value) {
             return false;
         }
@@ -656,14 +600,9 @@ class Build extends Model
      * @param int $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setErrorsTotal($value)
+    public function setErrorsTotal(int $value)
     {
-        $this->validateNotNull('errors_total', $value);
-        $this->validateInt('errors_total', $value);
-
         if ($this->data['errors_total'] === $value) {
             return false;
         }
@@ -707,14 +646,9 @@ class Build extends Model
      * @param int $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setErrorsTotalPrevious($value)
+    public function setErrorsTotalPrevious(int $value)
     {
-        $this->validateNotNull('errors_total_previous', $value);
-        $this->validateInt('errors_total_previous', $value);
-
         if ($this->data['errors_total_previous'] === $value) {
             return false;
         }
@@ -749,14 +683,9 @@ class Build extends Model
      * @param int $value
      *
      * @return bool
-     *
-     * @throws InvalidArgumentException
      */
-    public function setErrorsNew($value)
+    public function setErrorsNew(int $value)
     {
-        $this->validateNotNull('errors_new', $value);
-        $this->validateInt('errors_new', $value);
-
         if ($this->data['errors_new'] === $value) {
             return false;
         }
