@@ -421,9 +421,12 @@ class InstallCommand extends Command
             $dbPort = (int)$helper->ask($input, $output, $questionPort);
         }
 
-        if ('pgsql' === $dbType) {
-            $dbPgsqlSslmode = $input->getOption('db-pgsql-sslmode')
-                ?: 'prefer';
+        if (
+            $dbType === 'pgsql'
+            && !$dbPgsqlSslmode = $input->getOption('db-pgsql-sslmode')
+        ) {
+            $questionSslmode = new Question('Enter your database connection\'s SSL mode (default: prefer): ', 'prefer');
+            $dbPgsqlSslmode  = $helper->ask($input, $output, $questionSslmode);
         }
 
         if (!$dbName = $input->getOption('db-name')) {
@@ -484,7 +487,7 @@ class InstallCommand extends Command
 
         $dns .= ';dbname=' . $db['name'];
 
-        if ($db["type"] === "pgsql") {
+        if ($db['type'] === 'pgsql') {
             $dns .= ';sslmode=' . $db['servers']['write'][0]['pgsql-sslmode'];
         }
 
